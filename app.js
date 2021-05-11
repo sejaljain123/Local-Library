@@ -8,16 +8,10 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var catalogRouter = require('./routes/catalog');
 require('dotenv').config();
-
+var database = require('./database');
 var app = express();
 
-var mongoose = require('mongoose');
-var mongoDB = process.env.MONGO_URl;
-
-mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
-var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-
+database.connect();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
